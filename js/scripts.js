@@ -12,8 +12,20 @@ function sendOrder(){
     var email = document.getElementById("email").value;
     var amount = document.getElementById("amount").value;
     var feedback = document.getElementById("feedback");
-    var url = "";
+    
+    feedback.style.display = "block";
+    // input validation
+    if(phone.length != 12){
+        feedback.innerText = "Invalid Phone Number";
+        return;
+    }
 
+    if(amount < 1){
+        feedback.innerText = "Invalid Amount";
+        return;
+    }
+    
+    var url = "";
     if(env === "dev"){
         url = "http://127.0.0.1:5000/order";
     }
@@ -24,7 +36,6 @@ function sendOrder(){
     var obj = new XMLHttpRequest();
     obj.onload = function(){
         var response = JSON.parse(obj.responseText)
-        feedback.style.display = "block";
         if(response["status"] === "success"){
             feedback.innerText = "Thank you for your order";
         }
