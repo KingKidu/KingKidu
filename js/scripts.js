@@ -18,7 +18,7 @@ function sendOrder(){
         url = "http://127.0.0.1:5000/order";
     }
     else{
-        url = "http://kingkidu.pythonanywhere.com/order";
+        url = "https://kingkidu.pythonanywhere.com/order";
     }
 
     var obj = new XMLHttpRequest();
