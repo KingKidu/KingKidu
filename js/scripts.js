@@ -16,7 +16,7 @@ function sendOrder(){
     feedback.style.display = "block";
     // input validation
     if(phone.length != 12){
-        feedback.innerText = "Invalid Phone Number";
+        feedback.innerText = "Invalid Phone Number, start with 255";
         return;
     }
 
