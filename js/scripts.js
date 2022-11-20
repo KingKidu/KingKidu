@@ -4,6 +4,46 @@ setInterval(function () {
     blink.style.opacity = blink.style.opacity == 0? 1:0;
 }, 600);
 
+var env = "dev";
+
+/* function to send orders to server */
+function sendOrder(){
+    var phone = document.getElementById("phone").value;
+    var email = document.getElementById("email").value;
+    var amount = document.getElementById("amount").value;
+    var feedback = document.getElementById("feedback");
+    var url = "";
+
+    if(env === "dev"){
+        url = "http://127.0.0.1:5000/order";
+    }
+    else{
+        url = "http://kingkidu.pythonanywhere.com/order";
+    }
+
+    var obj = new XMLHttpRequest();
+    obj.onload = function(){
+        var response = JSON.parse(obj.responseText)
+        feedback.style.display = "block";
+        if(response["status"] === "success"){
+            feedback.innerText = "Thank you for your order";
+        }
+        else{
+            feedback.innerText = "Failed to send order, please try again!";
+        }
+    }
+    
+    obj.onerror = function(){
+        feedback.style.display = "block";
+        feedback.innerText = "Failed to send order, please try again!";
+    }
+
+    obj.open("POST", url);
+    obj.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    obj.send(JSON.stringify({'phone':phone,'email':email,'amount':amount}))
+    feedback.innerText = "sending order...";
+}
+
 
 /* Description: Custom JS file */
 
