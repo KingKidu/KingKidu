@@ -4,7 +4,7 @@ setInterval(function () {
     blink.style.opacity = blink.style.opacity == 0? 1:0;
 }, 600);
 
-var env = "dev";
+var env = "prod";
 
 /* function to send orders to server */
 function sendOrder(){
